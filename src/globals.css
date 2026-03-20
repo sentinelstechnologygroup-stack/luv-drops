@@ -1,0 +1,97 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap');
+
+:root {
+  /* ── Core palette ───────────────────────────────────── */
+  --navy:           #0f1e2e;
+  --navy-light:     #1a2e42;
+  --blue-accent:    #5b8fa8;
+  --blue-soft:      #7fb3cc;
+  --gold-warm:      #b89b5e;
+
+  /* ── Text ───────────────────────────────────────────── */
+  --text-primary:   #1a1f24;
+  --text-secondary: #4a5568;
+  --text-muted:     #718096;
+
+  /* ── Section backgrounds (only two light options) ───── */
+  --section-white:  #ffffff;
+  --section-gray:   #f3f5f7;
+
+  /* ── Legacy aliases (keep for backward compat) ─────── */
+  --cream:          #f3f5f7;
+  --cream-dark:     #e6e8eb;
+  --section-light:  #f3f5f7;
+
+  /* ── Card system ────────────────────────────────────── */
+  --card-bg:        #ffffff;
+  --card-border:    #e6e8eb;
+  --card-radius:    12px;
+  --card-shadow:    0 10px 30px rgba(0,0,0,0.04);
+
+  /* ── Divider ────────────────────────────────────────── */
+  --divider:        #e4e7ea;
+
+  /* ── Footer ─────────────────────────────────────────── */
+  --footer-bg:      #0f1e2e;
+  --footer-text:    #e6edf4;
+}
+
+@layer base {
+  body {
+    font-family: 'Inter', sans-serif;
+    color: var(--text-primary);   /* #1a1f24 */
+    background-color: var(--section-white);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+  }
+
+  ::selection {
+    background-color: rgba(91, 143, 168, 0.2);
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@layer components {
+  /* ── Global card — use className="card" on any card container */
+  .card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: var(--card-radius);
+    box-shadow: var(--card-shadow);
+  }
+
+  /* ── Section divider */
+  .section-divider {
+    border-top: 1px solid var(--divider);
+  }
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--cream);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--blue-accent);
+  border-radius: 3px;
+}
