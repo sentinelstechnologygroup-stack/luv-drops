@@ -7,11 +7,6 @@ import { createPageUrl } from "@/utils";
 import SectionWrapper from "@/components/shared/SectionWrapper";
 import StayConnected from "@/components/shared/StayConnected";
 
-function getEnv(key) {
-  const meta = /** @type {{ env?: Record<string, string | undefined> }} */ (import.meta);
-  return meta.env?.[key] || "";
-}
-
 const FIELD_CLASS =
   "w-full px-4 py-3 rounded-xl text-sm outline-none border transition-colors duration-200 bg-white focus:ring-2 focus:ring-offset-0";
 const FIELD_STYLE = { borderColor: "#e2e8f0", color: "var(--text-primary)" };
@@ -32,7 +27,11 @@ export default function Contact() {
     setError("");
 
     try {
-      const endpoint = getEnv("VITE_CONTACT_ENDPOINT");
+      const endpoint = import.meta.env.VITE_CONTACT_ENDPOINT || "";
+
+      if (!endpoint) {
+        throw new Error("Online messages are temporarily unavailable. Your message has not been sent. Please use the contact details on this website.");
+      }
 
       if (endpoint) {
         const response = await fetch(endpoint, {

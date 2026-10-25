@@ -15,11 +15,6 @@ import {
 import SectionWrapper from "@/components/shared/SectionWrapper";
 import StayConnected from "@/components/shared/StayConnected";
 
-function getEnv(key) {
-  const meta = /** @type {{ env?: Record<string, string | undefined> }} */ (import.meta);
-  return meta.env?.[key] || "";
-}
-
 const EVENT_TYPES = [
   {
     icon: Mic,
@@ -71,7 +66,11 @@ export default function BookNel() {
     setError("");
 
     try {
-      const endpoint = getEnv("VITE_BOOKING_ENDPOINT");
+      const endpoint = import.meta.env.VITE_BOOKING_ENDPOINT || "";
+
+      if (!endpoint) {
+        throw new Error("Online booking requests are temporarily unavailable. Your request has not been sent. Please use the contact details on this website.");
+      }
 
       if (endpoint) {
         const response = await fetch(endpoint, {
